@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+    overscroll-behavior-y: contain;
+}
+
 #app-canvas {
   border: 1px solid grey;
   position: absolute;
