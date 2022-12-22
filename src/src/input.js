@@ -7,6 +7,7 @@ export class InputHandler {
     document.addEventListener('mousedown', e => this.onMouseEvent(e));
     document.addEventListener('mouseup', e => this.onMouseEvent(e));
     document.addEventListener('touchstart', e => {
+      e.preventDefault();
       this.init();
 
       let rect = this.canvas.getBoundingClientRect();
@@ -19,6 +20,7 @@ export class InputHandler {
       this.mouse.canClick = true;
     });
     document.addEventListener('ontouchmove', e => {
+      e.preventDefault();
       this.init();
 
       let rect = this.canvas.getBoundingClientRect();
@@ -30,6 +32,7 @@ export class InputHandler {
       this.mouse.lmb = true;
     });
     document.addEventListener('ontouchend', e => {
+      e.preventDefault();
       this.init();
 
       let rect = this.canvas.getBoundingClientRect();
@@ -42,6 +45,7 @@ export class InputHandler {
       this.mouse.canClick = true;
     });
     document.addEventListener('ontouchcancel', e => {
+      e.preventDefault();
       this.init();
       this.mouse.lmb = false;
       this.mouse.canClick = true;
