@@ -6,6 +6,46 @@ export class InputHandler {
     document.addEventListener('mousemove', e => this.onMouseEvent(e));
     document.addEventListener('mousedown', e => this.onMouseEvent(e));
     document.addEventListener('mouseup', e => this.onMouseEvent(e));
+    document.addEventListener('touchstart', e => {
+      this.init();
+
+      let rect = this.canvas.getBoundingClientRect();
+      let ex = e.touches[0].clientX;
+      let ey = e.touches[0].clientY;
+
+      this.mouse.x = ex - rect.left;
+      this.mouse.y = ey - rect.top;
+      this.mouse.lmb = true;
+      this.mouse.canClick = true;
+    });
+    document.addEventListener('ontouchmove', e => {
+      this.init();
+
+      let rect = this.canvas.getBoundingClientRect();
+      let ex = e.touches[0].clientX;
+      let ey = e.touches[0].clientY;
+
+      this.mouse.x = ex - rect.left;
+      this.mouse.y = ey - rect.top;
+      this.mouse.lmb = true;
+    });
+    document.addEventListener('ontouchend', e => {
+      this.init();
+
+      let rect = this.canvas.getBoundingClientRect();
+      let ex = e.touches[0].clientX;
+      let ey = e.touches[0].clientY;
+
+      this.mouse.x = ex - rect.left;
+      this.mouse.y = ey - rect.top;
+      this.mouse.lmb = false;
+      this.mouse.canClick = true;
+    });
+    document.addEventListener('ontouchcancel', e => {
+      this.init();
+      this.mouse.lmb = false;
+      this.mouse.canClick = true;
+    });              
   }
 
   update() {
@@ -19,10 +59,14 @@ export class InputHandler {
     }
   }
 
-  onMouseEvent(e) {
+  init() {
     if (!this.mouse) {
       this.mouse = {x: 0, y: 0, lmb: false, click: false, canClick: true};
     }
+  }
+
+  onMouseEvent(e) {
+    this.init();
 
     let rect = this.canvas.getBoundingClientRect();
 
