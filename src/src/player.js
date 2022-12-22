@@ -18,13 +18,10 @@ export class Player {
   }
 
   update() {
-    let mouse = this.game.input?.mouse;
-    if (mouse) {
-      this.x = mouse.x;
-      this.y = mouse.y;
-      this.drawPoint = mouse.lmb;
-      this.drawCursor = true;
-    }
+    this.x = this.game.input.x;
+    this.y = this.game.input.y;
+    this.drawPoint = this.game.input.pressed;
+    this.drawCursor = true;
   }
 
   draw(context) {

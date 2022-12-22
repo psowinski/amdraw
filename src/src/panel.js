@@ -24,17 +24,17 @@ export class Panel {
   }
 
   update() {
-    const mouse = this.game.input.mouse;
-    if (mouse && mouse.click) {
+    const input = this.game.input;
+    if (input.clicked) {
       for (const button in this.colorButtons) {
         const ctrl = this.colorButtons[button];
-        if (ctrl.hitTest(mouse.x, mouse.y) === true)
+        if (ctrl.hitTest(input.x, input.y) === true)
           this.game.player.setColor(ctrl.color);
       }
-      if (this.btnClear.hitTest(mouse.x, mouse.y) === true) {
+      if (this.btnClear.hitTest(input.x, input.y) === true) {
         this.game.player.layer.reset();
       }
-      if (this.btnNewDoc.hitTest(mouse.x, mouse.y) === true) {
+      if (this.btnNewDoc.hitTest(input.x, input.y) === true) {
         this.game.background.change();
         this.game.player.layer.reset();
       }      
