@@ -10,7 +10,7 @@ window.addEventListener('load', function() {
   const game = new Game(canvas);
 
   function animate() {
-    game.update();6
+    game.update();
     game.draw(context);
     requestAnimationFrame(animate);
   }

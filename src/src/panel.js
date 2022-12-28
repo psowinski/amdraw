@@ -12,15 +12,18 @@ export class Panel {
     this.btnNewDoc = new ImgButton("newdoc", this.x + 15, this.y + 20);
     this.btnClear = new ImgButton("clear", this.x + 15, this.y + 80);
 
+    let idx = 0;
     let dx = 160;
     const distance = 40;
 
     this.colorButtons = [
-      new Button(Colors.Red, this.x + 15, this.y + dx, 20, 20),
-      new Button(Colors.LawnGreen, this.x + 15, this.y + dx + distance, 20, 20),
-      new Button(Colors.DodgerBlue, this.x + 15, this.y + dx + 2*distance, 20, 20),
-      new Button(Colors.Yellow, this.x + 15, this.y + dx + 3*distance, 20, 20),
-      new Button(Colors.DeepPink, this.x + 15, this.y + dx + 4*distance, 20, 20)];
+      new Button(Colors.Red, this.x + 15, this.y + dx + idx++ * distance, 20, 20),
+      new Button(Colors.LawnGreen, this.x + 15, this.y + dx + idx++ * distance, 20, 20),
+      new Button(Colors.DodgerBlue, this.x + 15, this.y + dx + idx++ * distance, 20, 20),
+      new Button(Colors.Orange, this.x + 15, this.y + dx + idx++ * distance, 20, 20),
+      new Button(Colors.Yellow, this.x + 15, this.y + dx + idx++ * distance, 20, 20),
+      new Button(Colors.DeepPink, this.x + 15, this.y + dx + idx++ * distance, 20, 20),
+      new Button(Colors.Chocolate, this.x + 15, this.y + dx + idx++ * distance, 20, 20)];
   }
 
   update() {

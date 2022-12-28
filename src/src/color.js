@@ -19,5 +19,7 @@ export const Colors = {
     LawnGreen: new Color(124, 252, 0, 'lawngreen'),
     DodgerBlue: new Color(30, 144, 255, 'dodgerblue'),
     DeepPink: new Color(255, 20, 147, 'deeppink'),
-    Yellow: new Color(255, 255, 0, 'yellow')
+    Yellow: new Color(255, 255, 0, 'yellow'),
+    Orange: new Color(255, 140, 0, 'darkorange'),
+    Chocolate: new Color(210, 105, 30, 'chocolate')
 }
