@@ -4,27 +4,29 @@ import { Colors } from "./color.js";
 export class Panel {
   constructor(game, worldWidth, worldHeight) {
     this.game = game;
-    this.width = 50;
+    this.width = 30;
     this.height = worldHeight;
     this.x = worldWidth - this.width;
     this.y = 0;
 
-    this.btnNewDoc = new ImgButton("newdoc", this.x + 15, this.y + 20);
-    this.btnPrevDoc = new ImgButton("prevdoc", this.x + 15, this.y + 60);
-    this.btnClear = new ImgButton("clear", this.x + 15, this.y + 100);
+    const xmargin = 5;
+
+    this.btnNewDoc = new ImgButton("newdoc", this.x + xmargin, this.y + 20);
+    this.btnPrevDoc = new ImgButton("prevdoc", this.x + xmargin, this.y + 60);
+    this.btnClear = new ImgButton("clear", this.x + xmargin, this.y + 100);
 
     let idx = 0;
     let dx = 160;
     const distance = 40;
 
     this.colorButtons = [
-      new Button(Colors.Red, this.x + 15, this.y + dx + idx++ * distance, 20, 20),
-      new Button(Colors.LawnGreen, this.x + 15, this.y + dx + idx++ * distance, 20, 20),
-      new Button(Colors.DodgerBlue, this.x + 15, this.y + dx + idx++ * distance, 20, 20),
-      new Button(Colors.Orange, this.x + 15, this.y + dx + idx++ * distance, 20, 20),
-      new Button(Colors.Yellow, this.x + 15, this.y + dx + idx++ * distance, 20, 20),
-      new Button(Colors.DeepPink, this.x + 15, this.y + dx + idx++ * distance, 20, 20),
-      new Button(Colors.Chocolate, this.x + 15, this.y + dx + idx++ * distance, 20, 20)];
+      new Button(Colors.Red, this.x + xmargin, this.y + dx + idx++ * distance, 20, 20),
+      new Button(Colors.LawnGreen, this.x + xmargin, this.y + dx + idx++ * distance, 20, 20),
+      new Button(Colors.DodgerBlue, this.x + xmargin, this.y + dx + idx++ * distance, 20, 20),
+      new Button(Colors.Orange, this.x + xmargin, this.y + dx + idx++ * distance, 20, 20),
+      new Button(Colors.Yellow, this.x + xmargin, this.y + dx + idx++ * distance, 20, 20),
+      new Button(Colors.DeepPink, this.x + xmargin, this.y + dx + idx++ * distance, 20, 20),
+      new Button(Colors.Chocolate, this.x + xmargin, this.y + dx + idx++ * distance, 20, 20)];
   }
 
   update() {

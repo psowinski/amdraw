@@ -4,7 +4,7 @@ window.addEventListener('load', function() {
   const canvas = document.getElementById('app-canvas');
   const context = canvas.getContext('2d');
 
-  canvas.width = 650;
+  canvas.width = 630;
   canvas.height = 600;
 
   const game = new Game(canvas);
