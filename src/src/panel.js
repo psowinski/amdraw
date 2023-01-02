@@ -10,7 +10,8 @@ export class Panel {
     this.y = 0;
 
     this.btnNewDoc = new ImgButton("newdoc", this.x + 15, this.y + 20);
-    this.btnClear = new ImgButton("clear", this.x + 15, this.y + 80);
+    this.btnPrevDoc = new ImgButton("prevdoc", this.x + 15, this.y + 60);
+    this.btnClear = new ImgButton("clear", this.x + 15, this.y + 100);
 
     let idx = 0;
     let dx = 160;
@@ -40,7 +41,11 @@ export class Panel {
       if (this.btnNewDoc.hitTest(input.x, input.y) === true) {
         this.game.background.change();
         this.game.player.layer.reset();
-      }      
+      }
+      if (this.btnPrevDoc.hitTest(input.x, input.y) === true) {
+        this.game.background.change(-1);
+        this.game.player.layer.reset();
+      }
     }
   }
 
@@ -49,6 +54,7 @@ export class Panel {
     context.fillRect(this.x, this.y, this.width, this.height);
 
     this.btnNewDoc.draw(context);
+    this.btnPrevDoc.draw(context);
     this.btnClear.draw(context);
     for (const button in this.colorButtons) {
       this.colorButtons[button].draw(context);
