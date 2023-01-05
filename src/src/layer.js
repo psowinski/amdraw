@@ -11,7 +11,7 @@ export class Layer {
   }
 
   drawPoint(x, y, radius, color) {
-    this.context.fillStyle = color.getStyle(0.2);
+    this.context.fillStyle = color.getStyle(0.5);
     this.context.beginPath();
     this.context.arc(x-2, y-2, radius, 0, 2 * Math.PI);
     this.context.fill();

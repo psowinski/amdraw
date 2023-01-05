@@ -2,6 +2,7 @@ import { Background } from './background.js';
 import { Fan } from './fan.js';
 import { InputHandler } from './input.js';
 import { Layer } from './layer.js';
+import { GameMode } from './mode.js';
 import { Panel } from './panel.js';
 import { Player } from './player.js';
 
@@ -16,8 +17,11 @@ export class Game {
 
     this.background = new Background(this.width, this.height);
     this.fan = new Fan(this);
-    this.player = new Player(this, new Layer(this));
+    this.drawLayer = new Layer(this);
+    this.player = new Player(this, this.drawLayer);
     this.input = new InputHandler(canvas);
+
+    this.mode = GameMode.Draw;
   }
 
   update() {
@@ -31,9 +35,28 @@ export class Game {
   draw(context) {
     context.clearRect(0, 0, this.width, this.height);
 
-    this.background.draw(context);
-    this.fan.draw(context);
-    this.player.draw(context);
+    if (this.mode === GameMode.White) {
+      this.background.draw(context);
+    } else if (this.mode === GameMode.Black) {
+      this.drawBlack(context);
+    } else {
+      this.background.draw(context);
+      this.fan.draw(context);
+    }
+    this.drawLayer.draw(context);
     this.panel.draw(context);
+    
+    if (this.mode === GameMode.Draw) {
+      this.player.draw(context);
+    }
+  }
+
+  drawBlack(context) {
+    context.fillStyle = "black";
+    context.fillRect(0, 0, this.width, this.height);
+  }
+
+  setMode(mode) {
+    this.mode = mode;
   }
 }

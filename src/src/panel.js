@@ -1,5 +1,6 @@
 import { Button, ImgButton } from "./button.js";
 import { Colors } from "./color.js";
+import { GameMode } from "./mode.js";
 
 export class Panel {
   constructor(game, worldWidth, worldHeight) {
@@ -16,17 +17,19 @@ export class Panel {
     this.btnClear = new ImgButton("clear", this.x + xmargin, this.y + 100);
 
     let idx = 0;
-    let dx = 160;
+    let ymargin = 160;
     const distance = 40;
 
     this.colorButtons = [
-      new Button(Colors.Red, this.x + xmargin, this.y + dx + idx++ * distance, 20, 20),
-      new Button(Colors.LawnGreen, this.x + xmargin, this.y + dx + idx++ * distance, 20, 20),
-      new Button(Colors.DodgerBlue, this.x + xmargin, this.y + dx + idx++ * distance, 20, 20),
-      new Button(Colors.Orange, this.x + xmargin, this.y + dx + idx++ * distance, 20, 20),
-      new Button(Colors.Yellow, this.x + xmargin, this.y + dx + idx++ * distance, 20, 20),
-      new Button(Colors.DeepPink, this.x + xmargin, this.y + dx + idx++ * distance, 20, 20),
-      new Button(Colors.Chocolate, this.x + xmargin, this.y + dx + idx++ * distance, 20, 20)];
+      new Button(Colors.Red, this.x + xmargin, this.y + ymargin + idx++ * distance, 20, 20),
+      new Button(Colors.LawnGreen, this.x + xmargin, this.y + ymargin + idx++ * distance, 20, 20),
+      new Button(Colors.DodgerBlue, this.x + xmargin, this.y + ymargin + idx++ * distance, 20, 20),
+      new Button(Colors.Orange, this.x + xmargin, this.y + ymargin + idx++ * distance, 20, 20),
+      new Button(Colors.Yellow, this.x + xmargin, this.y + ymargin + idx++ * distance, 20, 20),
+      new Button(Colors.DeepPink, this.x + xmargin, this.y + ymargin + idx++ * distance, 20, 20),
+      new Button(Colors.Chocolate, this.x + xmargin, this.y + ymargin + idx++ * distance, 20, 20)];
+  
+    this.btnMode = new ImgButton("mode", this.x + xmargin, this.y + ymargin + 60 + idx * distance);
   }
 
   update() {
@@ -40,14 +43,33 @@ export class Panel {
       if (this.btnClear.hitTest(input.x, input.y) === true) {
         this.game.player.layer.reset();
       }
-      if (this.btnNewDoc.hitTest(input.x, input.y) === true) {
-        this.game.background.change();
-        this.game.player.layer.reset();
+      else if (this.btnNewDoc.hitTest(input.x, input.y) === true) {
+        this.changeBackground(1);
       }
-      if (this.btnPrevDoc.hitTest(input.x, input.y) === true) {
-        this.game.background.change(-1);
-        this.game.player.layer.reset();
+      else if (this.btnPrevDoc.hitTest(input.x, input.y) === true) {
+        this.changeBackground(-1);
       }
+      else if (this.btnMode.hitTest(input.x, input.y) === true) {
+        this.switchGameMode();
+      }
+    }
+  }
+
+  changeBackground(direction) {
+    this.game.background.change(direction);
+    this.game.player.layer.reset();    
+  }
+
+  switchGameMode() {
+    if (this.game.mode === GameMode.White) {
+      this.game.setMode(GameMode.Draw);
+      this.game.player.setCanDraw(true);
+    } else if (this.game.mode === GameMode.Black) {
+      this.game.setMode(GameMode.White);
+      this.game.player.setCanDraw(false);
+    } else {
+      this.game.setMode(GameMode.Black);
+      this.game.player.setCanDraw(false);
     }
   }
 
@@ -61,5 +83,6 @@ export class Panel {
     for (const button in this.colorButtons) {
       this.colorButtons[button].draw(context);
     }
+    this.btnMode.draw(context);
   }
 }
